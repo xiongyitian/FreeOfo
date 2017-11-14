@@ -6,9 +6,11 @@ target 'FreeOfo' do
   use_frameworks!
 
   # Pods for FreeOfo
-  pod 'Moya/ReactiveSwift'
-  pod 'ReactiveCocoa'
-
+  pod 'Moya/RxSwift'
+  pod 'SnapKit'
+  pod 'RxCocoa'
+  pod 'RxBluetoothKit'
+  pod 'SwiftyJSON'
   target 'FreeOfoTests' do
     inherit! :search_paths
     # Pods for testing

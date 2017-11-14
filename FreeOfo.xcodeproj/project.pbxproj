@@ -15,6 +15,15 @@
 		2EB528DA1FB30ECD00FB912B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EB528D81FB30ECD00FB912B /* LaunchScreen.storyboard */; };
 		2EB528E51FB30ECD00FB912B /* FreeOfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB528E41FB30ECD00FB912B /* FreeOfoTests.swift */; };
 		2EB528F01FB30ECD00FB912B /* FreeOfoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB528EF1FB30ECD00FB912B /* FreeOfoUITests.swift */; };
+		2EB528FE1FB3F69000FB912B /* SingalsObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB528FD1FB3F69000FB912B /* SingalsObservable.swift */; };
+		2EB529001FB4019B00FB912B /* NetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB528FF1FB4019B00FB912B /* NetService.swift */; };
+		2EB529021FB4309F00FB912B /* ViewController+UIStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB529011FB4309F00FB912B /* ViewController+UIStyle.swift */; };
+		2EB529051FB4806600FB912B /* BLEworker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB529041FB4806600FB912B /* BLEworker.swift */; };
+		2EB529091FB59BFA00FB912B /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB529081FB59BFA00FB912B /* Helper.swift */; };
+		2EB5290C1FB5CB1100FB912B /* Unlocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB5290B1FB5CB1000FB912B /* Unlocker.swift */; };
+		2EB5290E1FB5CBF300FB912B /* UnlockerScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EB5290D1FB5CBF300FB912B /* UnlockerScene.storyboard */; };
+		2EB529101FB5CC9400FB912B /* UnlockerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB5290F1FB5CC9400FB912B /* UnlockerViewController.swift */; };
+		2EB529141FBA9F1000FB912B /* Helper+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB529131FBA9F1000FB912B /* Helper+String.swift */; };
 		BC2C3487797D1B8818523E63 /* Pods_FreeOfoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDA593C116E44FDA41F2AF6D /* Pods_FreeOfoUITests.framework */; };
 		DADD9073FCB55ADD354919B4 /* Pods_FreeOfo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE7168369594E80AAFAAE99B /* Pods_FreeOfo.framework */; };
 /* End PBXBuildFile section */
@@ -51,6 +60,16 @@
 		2EB528EB1FB30ECD00FB912B /* FreeOfoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FreeOfoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EB528EF1FB30ECD00FB912B /* FreeOfoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeOfoUITests.swift; sourceTree = "<group>"; };
 		2EB528F11FB30ECD00FB912B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2EB528FD1FB3F69000FB912B /* SingalsObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingalsObservable.swift; sourceTree = "<group>"; };
+		2EB528FF1FB4019B00FB912B /* NetService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetService.swift; sourceTree = "<group>"; };
+		2EB529011FB4309F00FB912B /* ViewController+UIStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+UIStyle.swift"; sourceTree = "<group>"; };
+		2EB529041FB4806600FB912B /* BLEworker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEworker.swift; sourceTree = "<group>"; };
+		2EB529081FB59BFA00FB912B /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		2EB5290A1FB5A0DD00FB912B /* BridgeHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgeHeader.h; sourceTree = "<group>"; };
+		2EB5290B1FB5CB1000FB912B /* Unlocker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Unlocker.swift; path = FreeOfo/Unlocker.swift; sourceTree = SOURCE_ROOT; };
+		2EB5290D1FB5CBF300FB912B /* UnlockerScene.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = UnlockerScene.storyboard; path = FreeOfo/Unlocker/UnlockerScene.storyboard; sourceTree = SOURCE_ROOT; };
+		2EB5290F1FB5CC9400FB912B /* UnlockerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockerViewController.swift; sourceTree = "<group>"; };
+		2EB529131FBA9F1000FB912B /* Helper+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Helper+String.swift"; sourceTree = "<group>"; };
 		3152098A6DEC2C61C21F25FE /* Pods-FreeOfo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FreeOfo.release.xcconfig"; path = "Pods/Target Support Files/Pods-FreeOfo/Pods-FreeOfo.release.xcconfig"; sourceTree = "<group>"; };
 		32AF4FD2F45076E77C2D03AE /* Pods-FreeOfo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FreeOfo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FreeOfo/Pods-FreeOfo.debug.xcconfig"; sourceTree = "<group>"; };
 		753317E83CD5D3D287C713FC /* Pods_FreeOfoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FreeOfoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,12 +133,19 @@
 		2EB528CE1FB30ECD00FB912B /* FreeOfo */ = {
 			isa = PBXGroup;
 			children = (
+				2EB528FF1FB4019B00FB912B /* NetService.swift */,
+				2EB529151FBA9F1500FB912B /* Helper */,
 				2EB528CF1FB30ECD00FB912B /* AppDelegate.swift */,
-				2EB528D11FB30ECD00FB912B /* ViewController.swift */,
-				2EB528D31FB30ECD00FB912B /* Main.storyboard */,
+				2EB5290B1FB5CB1000FB912B /* Unlocker.swift */,
+				2EB529111FB5CCB600FB912B /* Unlocker */,
+				2EB529071FB5615800FB912B /* ViewController */,
+				2EB528FD1FB3F69000FB912B /* SingalsObservable.swift */,
+				2EB529041FB4806600FB912B /* BLEworker.swift */,
 				2EB528D61FB30ECD00FB912B /* Assets.xcassets */,
 				2EB528D81FB30ECD00FB912B /* LaunchScreen.storyboard */,
 				2EB528DB1FB30ECD00FB912B /* Info.plist */,
+				2EB5290A1FB5A0DD00FB912B /* BridgeHeader.h */,
+				2EB529121FB5D32B00FB912B /* SupportFile */,
 			);
 			path = FreeOfo;
 			sourceTree = "<group>";
@@ -140,6 +166,41 @@
 				2EB528F11FB30ECD00FB912B /* Info.plist */,
 			);
 			path = FreeOfoUITests;
+			sourceTree = "<group>";
+		};
+		2EB529071FB5615800FB912B /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2EB528D11FB30ECD00FB912B /* ViewController.swift */,
+				2EB529011FB4309F00FB912B /* ViewController+UIStyle.swift */,
+				2EB528D31FB30ECD00FB912B /* Main.storyboard */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		2EB529111FB5CCB600FB912B /* Unlocker */ = {
+			isa = PBXGroup;
+			children = (
+				2EB5290D1FB5CBF300FB912B /* UnlockerScene.storyboard */,
+				2EB5290F1FB5CC9400FB912B /* UnlockerViewController.swift */,
+			);
+			path = Unlocker;
+			sourceTree = "<group>";
+		};
+		2EB529121FB5D32B00FB912B /* SupportFile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SupportFile;
+			sourceTree = "<group>";
+		};
+		2EB529151FBA9F1500FB912B /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				2EB529081FB59BFA00FB912B /* Helper.swift */,
+				2EB529131FBA9F1000FB912B /* Helper+String.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		923717C6430027EBFE7FD61D /* Frameworks */ = {
@@ -281,6 +342,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EB5290E1FB5CBF300FB912B /* UnlockerScene.storyboard in Resources */,
 				2EB528DA1FB30ECD00FB912B /* LaunchScreen.storyboard in Resources */,
 				2EB528D71FB30ECD00FB912B /* Assets.xcassets in Resources */,
 				2EB528D51FB30ECD00FB912B /* Main.storyboard in Resources */,
@@ -361,17 +423,23 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-FreeOfo/Pods-FreeOfo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
-				"${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework",
-				"${BUILT_PRODUCTS_DIR}/ReactiveSwift/ReactiveSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
+				"${BUILT_PRODUCTS_DIR}/RxBluetoothKit/RxBluetoothKit.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveCocoa.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxBluetoothKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -467,7 +535,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				2EB528D21FB30ECD00FB912B /* ViewController.swift in Sources */,
+				2EB529091FB59BFA00FB912B /* Helper.swift in Sources */,
+				2EB529051FB4806600FB912B /* BLEworker.swift in Sources */,
+				2EB529101FB5CC9400FB912B /* UnlockerViewController.swift in Sources */,
+				2EB529141FBA9F1000FB912B /* Helper+String.swift in Sources */,
 				2EB528D01FB30ECD00FB912B /* AppDelegate.swift in Sources */,
+				2EB5290C1FB5CB1100FB912B /* Unlocker.swift in Sources */,
+				2EB528FE1FB3F69000FB912B /* SingalsObservable.swift in Sources */,
+				2EB529021FB4309F00FB912B /* ViewController+UIStyle.swift in Sources */,
+				2EB529001FB4019B00FB912B /* NetService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -641,7 +717,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.yunba.FreeOfo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/FreeOfo/BridgeHeader.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -658,7 +735,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.yunba.FreeOfo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/FreeOfo/BridgeHeader.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
