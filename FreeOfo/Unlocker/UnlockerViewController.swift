@@ -39,7 +39,7 @@ class UnlockerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let timerQueue = DispatchQueue(label: "com.polidea.rxbluetoothkit.timer")
+        let timerQueue = DispatchQueue(label: "io.yunba.timer")
         scheduler = ConcurrentDispatchQueueScheduler(queue: timerQueue)
         // Do any additional setup after loading the view.
         logLabel.lineBreakMode = .byWordWrapping

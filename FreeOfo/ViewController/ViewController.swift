@@ -34,7 +34,7 @@ class ViewController: UIViewController {
             .disposed(by: disposeBag)
         
         unlockBtn.rx.tap.subscribe(onNext:{ [unowned self] in
-            self.provider.request(.get_with_url_lock(token: Helper.getToken(carno: "35264575"), carno:"35264575")){ result in
+            self.provider.request(.get_with_url_lock(token: Helper.getToken(carno: self.inputField.text!), carno:self.inputField.text!)){ result in
                                                         switch result {
                                                         case let .success(resp):
                                                             let jsonResp = JSON(resp.data)
