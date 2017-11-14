@@ -28,6 +28,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initChildView()
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
         inputField.rx.text
             .map{if $0 != nil {return Int($0!) != nil} else {return false}}
             .bind(to:unlockBtn.rx.isEnabled)
@@ -75,6 +77,7 @@ class ViewController: UIViewController {
         //input field style
         view.addSubview(inputField)
         inputField.keyboardType = .numberPad
+        inputField.font = UIFont.systemFont(ofSize: 40.0)
         inputField.snp.makeConstraints({(make) -> Void in
             make.height.equalTo(view).multipliedBy(0.15)
             make.left.equalTo(view).offset(20)
@@ -115,6 +118,12 @@ class ViewController: UIViewController {
             }
         })
     }
+    
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let identifier = segue.identifier else {return}

@@ -15,10 +15,8 @@
 		2EB528DA1FB30ECD00FB912B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EB528D81FB30ECD00FB912B /* LaunchScreen.storyboard */; };
 		2EB528E51FB30ECD00FB912B /* FreeOfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB528E41FB30ECD00FB912B /* FreeOfoTests.swift */; };
 		2EB528F01FB30ECD00FB912B /* FreeOfoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB528EF1FB30ECD00FB912B /* FreeOfoUITests.swift */; };
-		2EB528FE1FB3F69000FB912B /* SingalsObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB528FD1FB3F69000FB912B /* SingalsObservable.swift */; };
 		2EB529001FB4019B00FB912B /* NetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB528FF1FB4019B00FB912B /* NetService.swift */; };
 		2EB529021FB4309F00FB912B /* ViewController+UIStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB529011FB4309F00FB912B /* ViewController+UIStyle.swift */; };
-		2EB529051FB4806600FB912B /* BLEworker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB529041FB4806600FB912B /* BLEworker.swift */; };
 		2EB529091FB59BFA00FB912B /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB529081FB59BFA00FB912B /* Helper.swift */; };
 		2EB5290C1FB5CB1100FB912B /* Unlocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB5290B1FB5CB1000FB912B /* Unlocker.swift */; };
 		2EB5290E1FB5CBF300FB912B /* UnlockerScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EB5290D1FB5CBF300FB912B /* UnlockerScene.storyboard */; };
@@ -60,10 +58,8 @@
 		2EB528EB1FB30ECD00FB912B /* FreeOfoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FreeOfoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EB528EF1FB30ECD00FB912B /* FreeOfoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeOfoUITests.swift; sourceTree = "<group>"; };
 		2EB528F11FB30ECD00FB912B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2EB528FD1FB3F69000FB912B /* SingalsObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingalsObservable.swift; sourceTree = "<group>"; };
 		2EB528FF1FB4019B00FB912B /* NetService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetService.swift; sourceTree = "<group>"; };
 		2EB529011FB4309F00FB912B /* ViewController+UIStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+UIStyle.swift"; sourceTree = "<group>"; };
-		2EB529041FB4806600FB912B /* BLEworker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEworker.swift; sourceTree = "<group>"; };
 		2EB529081FB59BFA00FB912B /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		2EB5290A1FB5A0DD00FB912B /* BridgeHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgeHeader.h; sourceTree = "<group>"; };
 		2EB5290B1FB5CB1000FB912B /* Unlocker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Unlocker.swift; path = FreeOfo/Unlocker.swift; sourceTree = SOURCE_ROOT; };
@@ -139,8 +135,6 @@
 				2EB5290B1FB5CB1000FB912B /* Unlocker.swift */,
 				2EB529111FB5CCB600FB912B /* Unlocker */,
 				2EB529071FB5615800FB912B /* ViewController */,
-				2EB528FD1FB3F69000FB912B /* SingalsObservable.swift */,
-				2EB529041FB4806600FB912B /* BLEworker.swift */,
 				2EB528D61FB30ECD00FB912B /* Assets.xcassets */,
 				2EB528D81FB30ECD00FB912B /* LaunchScreen.storyboard */,
 				2EB528DB1FB30ECD00FB912B /* Info.plist */,
@@ -536,12 +530,10 @@
 			files = (
 				2EB528D21FB30ECD00FB912B /* ViewController.swift in Sources */,
 				2EB529091FB59BFA00FB912B /* Helper.swift in Sources */,
-				2EB529051FB4806600FB912B /* BLEworker.swift in Sources */,
 				2EB529101FB5CC9400FB912B /* UnlockerViewController.swift in Sources */,
 				2EB529141FBA9F1000FB912B /* Helper+String.swift in Sources */,
 				2EB528D01FB30ECD00FB912B /* AppDelegate.swift in Sources */,
 				2EB5290C1FB5CB1100FB912B /* Unlocker.swift in Sources */,
-				2EB528FE1FB3F69000FB912B /* SingalsObservable.swift in Sources */,
 				2EB529021FB4309F00FB912B /* ViewController+UIStyle.swift in Sources */,
 				2EB529001FB4019B00FB912B /* NetService.swift in Sources */,
 			);
