@@ -89,7 +89,7 @@ class UnlockerViewController: UIViewController {
         if let data = peripheral.advertisementData.manufacturerData {
             let dataString = data.hexadecimalString
             let index = dataString.index(dataString.startIndex, offsetBy: 4)
-            let scanedMacAddr = dataString.substring(from: index)
+            let scanedMacAddr = dataString[index...]
             
             log2Label(log: "scaned : \(scanedMacAddr)")
             if let macAddr = unlocker?.macAddr.upsideDownMac {

@@ -15,7 +15,7 @@ extension String {
         while subArray.count < 6 {
             let startIndex = self.index(self.startIndex, offsetBy: subArray.count * 2)
             let endIndex = self.index(startIndex, offsetBy: 2)
-            subArray.append(self[startIndex..<endIndex])
+            subArray.append(String(self[startIndex..<endIndex]))
         }
         var lastString = String()
         for i in stride(from: (subArray.count - 1), through: 0, by: -1) {
