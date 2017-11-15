@@ -12,13 +12,14 @@ import SwiftyJSON
 struct Helper {
     static let auth_key   = "dwy6fiY2WYorbFoK"
     static let secret_key = "kCAevYplcaJiEQvYYJsDr6mkWm19kArv"
-    static let basic_json_param = JSON(["timestamp": Date().millisecondsString,
-                                        "auth_key": Helper.auth_key,
+    static let basic_json_param = JSON(["auth_key": Helper.auth_key,
                                         "asynchronous":"0"])
+    lazy var timeStamp = Date().millisecondsString
 
-    static func getToken(carno: String) -> String {
+    static func getToken(carno: String, timestamp: String) -> String {
         var jsonParam = Helper.basic_json_param
         jsonParam["carno"].string = carno
+        jsonParam["timestamp"].string = timestamp
         
         var keyArray:[String] = []
         var token2bMD5 = ""

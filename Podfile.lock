@@ -14,6 +14,7 @@ PODS:
   - RxSwift (4.0.0)
   - SnapKit (4.0.0)
   - SwiftyJSON (4.0.0)
+  - Toast-Swift (2.0.0)
 
 DEPENDENCIES:
   - Moya/RxSwift
@@ -21,6 +22,7 @@ DEPENDENCIES:
   - RxCocoa
   - SnapKit
   - SwiftyJSON
+  - Toast-Swift (~> 2.0.0)
 
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
@@ -31,7 +33,8 @@ SPEC CHECKSUMS:
   RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
+  Toast-Swift: 5b2f8f720f7e78e48511f693df1f9c9a6e38a25a
 
-PODFILE CHECKSUM: eab76ba439a2bf89aca995f6514ef16cb160fecc
+PODFILE CHECKSUM: a5e371f88df2b7c5ba37d7c86bb663cfbed93b4f
 
 COCOAPODS: 1.4.0.beta.2

@@ -25,6 +25,7 @@ class UnlockerViewController: UIViewController {
     private var scheduler: ConcurrentDispatchQueueScheduler!
     
     fileprivate var peripheralsArray: [ScannedPeripheral] = []
+    fileprivate var connectedPeripherals:[Peripheral] = []
     fileprivate var servicesList: [Service] = []
 
     private var isScanInProgress = false
@@ -82,6 +83,8 @@ class UnlockerViewController: UIViewController {
         scanningDisposable?.dispose()
         self.disposeBag = DisposeBag()
         isScanInProgress = false
+        for peripheral in self.connectedPeripherals {
+        }
         self.performSegue(withIdentifier: "unwind2Main", sender: nil)
     }
     
@@ -96,6 +99,7 @@ class UnlockerViewController: UIViewController {
                 log2Label(log: "got macAddr in ofo \(macAddr)")
                 if macAddr.lowercased() == scanedMacAddr {
                     connectForUnlocking(peripheral: peripheral)
+                    scanningDisposable?.dispose()
                 }
             }
         }
@@ -106,6 +110,7 @@ class UnlockerViewController: UIViewController {
             .subscribe(onNext: { [weak self] in
                 guard let `self` = self else { return }
 //                self.title = "Connected"
+                self.connectedPeripherals.append($0)
                 self.log2Label(log: "connected")
                 self.connectedPeripheral = $0
                 self.monitorDisconnection(for: $0)
@@ -186,6 +191,9 @@ class UnlockerViewController: UIViewController {
                 switch event {
                 case .completed:
                     print("completed! ")
+                    self.connectedPeripheral!.cancelConnection().subscribe{ event in
+                        print("disconnected! ")
+                        }.disposed(by: self.disposeBag)
                 case .error(let error):
                     print(error.localizedDescription)
                 case .next(_):

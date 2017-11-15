@@ -11,7 +11,7 @@ import Moya
 import SwiftyJSON
 
 enum OfoReq {
-    case get_with_url_lock(token:String, carno:String)
+    case get_with_url_lock(token:String, carno:String, timestamp: String)
     case query_info(lockSn: String)
 }
 
@@ -20,7 +20,7 @@ extension OfoReq:TargetType{
     var baseURL: URL {return URL(string:"http://twxworker.ofo.com")!}
     var path: String{
         switch self {
-        case .get_with_url_lock(_,_):
+        case .get_with_url_lock(_,_,_):
             return "/lockWorker/querySnByCarno"
         case .query_info(_):
             return "/twxworker/queryInfo"
@@ -28,7 +28,7 @@ extension OfoReq:TargetType{
     }
     var method: Moya.Method {
         switch self {
-        case .get_with_url_lock(_,_):
+        case .get_with_url_lock(_,_,_):
             return .get
         case .query_info(lockSn: _):
             return .get
@@ -36,10 +36,11 @@ extension OfoReq:TargetType{
     }
     var task: Task {
         switch self {
-        case .get_with_url_lock(token: let token, carno: let carno):
+        case .get_with_url_lock(token: let token, carno: let carno, timestamp: let timestamp):
             var params = Helper.basic_json_param.dictionaryObject!
-            params["token"] = token
-            params["carno"] = carno
+            params["token"]     = token
+            params["carno"]     = carno
+            params["timestamp"] = timestamp
             return .requestParameters(parameters: params,
                                       encoding: URLEncoding.queryString)
         case .query_info(lockSn: let lockSn):
@@ -48,7 +49,7 @@ extension OfoReq:TargetType{
     }
     var sampleData: Data {
         switch self {
-        case .get_with_url_lock(_,_):
+        case .get_with_url_lock(_,_,_):
             return "".utf8Encoded
         case .query_info(lockSn: _):
             return "".utf8Encoded
@@ -56,7 +57,7 @@ extension OfoReq:TargetType{
     }
     var headers: [String: String]? {
         switch self {
-        case .get_with_url_lock(token: _, carno: _):
+        case .get_with_url_lock(token: _, carno: _, timestamp: _):
             return nil
         case .query_info(lockSn: _):
             return nil

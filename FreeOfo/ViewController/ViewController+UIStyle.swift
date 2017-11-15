@@ -33,3 +33,16 @@ extension UITextField {
         self.layer.shadowRadius = 0.0
     }
 }
+
+extension ViewController {
+    func getLogLabel(log: String) -> UILabel {
+        let logLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.logScrollView.bounds.width, height: 40))
+        logLabel.numberOfLines = 14
+        logLabel.lineBreakMode = .byTruncatingMiddle
+        logLabel.text = log
+        logLabel.textColor = .white
+        logLabel.font = UIFont.systemFont(ofSize: 14.0)
+        
+        return logLabel
+    }
+}

@@ -23,6 +23,7 @@ class ViewController: UIViewController {
     
     let evenBus = PublishSubject<Bool>()
     
+    @IBOutlet weak var logScrollView: UIScrollView!
     let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
@@ -30,16 +31,23 @@ class ViewController: UIViewController {
         initChildView()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
+        self.logScrollView.contentSize.height = 1000
         inputField.rx.text
             .map{if $0 != nil {return Int($0!) != nil} else {return false}}
             .bind(to:unlockBtn.rx.isEnabled)
             .disposed(by: disposeBag)
         
         unlockBtn.rx.tap.subscribe(onNext:{ [unowned self] in
-            self.provider.request(.get_with_url_lock(token: Helper.getToken(carno: self.inputField.text!), carno:self.inputField.text!)){ result in
+            let timestamp = Date().millisecondsString
+            self.provider.request(.get_with_url_lock(token: Helper.getToken(carno: self.inputField.text!, timestamp: timestamp), carno:self.inputField.text!, timestamp: timestamp)){ result in
+                print(Helper.getToken(carno: self.inputField.text!, timestamp: timestamp))
                                                         switch result {
                                                         case let .success(resp):
                                                             let jsonResp = JSON(resp.data)
+                                                            let log = self.getLogLabel(log: jsonResp.rawString([.castNilToNSNull: true, .jsonSerialization: true])!)
+                                                            print(jsonResp.rawString([.castNilToNSNull: true, .jsonSerialization: true])!)
+                                                            print(log.frame.height)
+                                                            self.logScrollView.addSubview(log)
                                                             if jsonResp["data"].exists() {
                                                                 self.queryLockInfo(lockSn: jsonResp["data"][0]["sn"].stringValue)
                                                             }

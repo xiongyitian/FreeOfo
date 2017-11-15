@@ -11,6 +11,8 @@ target 'FreeOfo' do
   pod 'RxCocoa'
   pod 'RxBluetoothKit'
   pod 'SwiftyJSON'
+  pod 'Toast-Swift', '~> 2.0.0'
+
   target 'FreeOfoTests' do
     inherit! :search_paths
     # Pods for testing
