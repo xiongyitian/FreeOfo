@@ -36,7 +36,8 @@ extension UITextField {
 
 extension ViewController {
     func getLogLabel(log: String) -> UILabel {
-        let logLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.logScrollView.bounds.width, height: 40))
+        let logLabel = UILabel(frame: CGRect(x: 0, y: ((self.logScrollView.subviews.count - 2) * 40), width: Int(self.logScrollView.bounds.width), height: 40))
+        print(self.logScrollView.subviews.count)
         logLabel.numberOfLines = 14
         logLabel.lineBreakMode = .byTruncatingMiddle
         logLabel.text = log

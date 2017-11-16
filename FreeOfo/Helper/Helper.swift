@@ -14,7 +14,6 @@ struct Helper {
     static let secret_key = "kCAevYplcaJiEQvYYJsDr6mkWm19kArv"
     static let basic_json_param = JSON(["auth_key": Helper.auth_key,
                                         "asynchronous":"0"])
-    lazy var timeStamp = Date().millisecondsString
 
     static func getToken(carno: String, timestamp: String) -> String {
         var jsonParam = Helper.basic_json_param

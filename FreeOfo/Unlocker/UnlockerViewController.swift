@@ -42,6 +42,23 @@ class UnlockerViewController: UIViewController {
         super.viewDidLoad()
         let timerQueue = DispatchQueue(label: "io.yunba.timer")
         scheduler = ConcurrentDispatchQueueScheduler(queue: timerQueue)
+        let stateObservable = manager.rx_state
+        stateObservable.subscribe(onNext: {
+            switch $0{
+            case .poweredOn:
+                return
+            case .poweredOff:
+                self.alertUser(alert: "请打开蓝牙")
+            case .unauthorized:
+                self.alertUser(alert: "请允许使用蓝牙")
+            case .unsupported:
+                self.alertUser(alert: "不支持蓝牙的设备")
+            case .unknown:
+                self.alertUser(alert: "未知蓝牙状态")
+            default:
+                return
+            }
+            }).disposed(by: disposeBag)
         // Do any additional setup after loading the view.
         logLabel.lineBreakMode = .byWordWrapping
         logLabel.numberOfLines = 0;
@@ -68,6 +85,7 @@ class UnlockerViewController: UIViewController {
         isScanInProgress = true
         log2Label(log: "scaning")
         scanningDisposable = manager.rx_state
+            .filter { $0 == .poweredOn }
             .take(1)
             .timeout(4.0, scheduler: scheduler)
             .flatMap { _ in self.manager.scanForPeripherals(withServices: [self.RX_SERVICE_UUID], options: nil) }
@@ -83,8 +101,6 @@ class UnlockerViewController: UIViewController {
         scanningDisposable?.dispose()
         self.disposeBag = DisposeBag()
         isScanInProgress = false
-        for peripheral in self.connectedPeripherals {
-        }
         self.performSegue(withIdentifier: "unwind2Main", sender: nil)
     }
     
@@ -109,7 +125,6 @@ class UnlockerViewController: UIViewController {
         manager.connect(peripheral.peripheral)
             .subscribe(onNext: { [weak self] in
                 guard let `self` = self else { return }
-//                self.title = "Connected"
                 self.connectedPeripherals.append($0)
                 self.log2Label(log: "connected")
                 self.connectedPeripheral = $0
@@ -216,5 +231,11 @@ class UnlockerViewController: UIViewController {
 extension UnlockerViewController {
     func log2Label(log: String) {
         self.logLabel.text = self.logLabel.text! + log + "\n"
+    }
+    
+    func alertUser(alert:String) {
+        let alert = UIAlertController(title: "Disconnected!", message: alert, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }

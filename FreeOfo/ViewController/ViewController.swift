@@ -47,6 +47,7 @@ class ViewController: UIViewController {
                                                             let log = self.getLogLabel(log: jsonResp.rawString([.castNilToNSNull: true, .jsonSerialization: true])!)
                                                             print(jsonResp.rawString([.castNilToNSNull: true, .jsonSerialization: true])!)
                                                             print(log.frame.height)
+                                                            
                                                             self.logScrollView.addSubview(log)
                                                             if jsonResp["data"].exists() {
                                                                 self.queryLockInfo(lockSn: jsonResp["data"][0]["sn"].stringValue)
