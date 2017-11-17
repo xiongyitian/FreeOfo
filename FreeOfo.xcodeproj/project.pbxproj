@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		09EB033754F117CCC30F41E8 /* Pods_FreeOfoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 753317E83CD5D3D287C713FC /* Pods_FreeOfoTests.framework */; };
+		2E3545D21FBE892100A322CD /* TabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E3545D11FBE892100A322CD /* TabBar.storyboard */; };
+		2E3545D51FBE8BF000A322CD /* TabItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3545D31FBE8BF000A322CD /* TabItemViewController.swift */; };
+		2E3545D61FBE8BF000A322CD /* TabItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E3545D41FBE8BF000A322CD /* TabItemViewController.xib */; };
+		2E3545D81FBEC3D400A322CD /* ViewController+BLE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3545D71FBEC3D400A322CD /* ViewController+BLE.swift */; };
+		2E3545DA1FBEC6AB00A322CD /* ViewController+Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3545D91FBEC6AB00A322CD /* ViewController+Logger.swift */; };
 		2EB528D01FB30ECD00FB912B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB528CF1FB30ECD00FB912B /* AppDelegate.swift */; };
 		2EB528D21FB30ECD00FB912B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB528D11FB30ECD00FB912B /* ViewController.swift */; };
 		2EB528D51FB30ECD00FB912B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EB528D31FB30ECD00FB912B /* Main.storyboard */; };
@@ -45,6 +50,11 @@
 
 /* Begin PBXFileReference section */
 		13CD6A951022550BAAC10257 /* Pods-FreeOfoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FreeOfoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FreeOfoTests/Pods-FreeOfoTests.release.xcconfig"; sourceTree = "<group>"; };
+		2E3545D11FBE892100A322CD /* TabBar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabBar.storyboard; sourceTree = "<group>"; };
+		2E3545D31FBE8BF000A322CD /* TabItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItemViewController.swift; sourceTree = "<group>"; };
+		2E3545D41FBE8BF000A322CD /* TabItemViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TabItemViewController.xib; sourceTree = "<group>"; };
+		2E3545D71FBEC3D400A322CD /* ViewController+BLE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+BLE.swift"; sourceTree = "<group>"; };
+		2E3545D91FBEC6AB00A322CD /* ViewController+Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Logger.swift"; sourceTree = "<group>"; };
 		2EB528CC1FB30ECD00FB912B /* FreeOfo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FreeOfo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EB528CF1FB30ECD00FB912B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2EB528D11FB30ECD00FB912B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -166,8 +176,13 @@
 			isa = PBXGroup;
 			children = (
 				2EB528D11FB30ECD00FB912B /* ViewController.swift */,
+				2E3545D71FBEC3D400A322CD /* ViewController+BLE.swift */,
 				2EB529011FB4309F00FB912B /* ViewController+UIStyle.swift */,
+				2E3545D91FBEC6AB00A322CD /* ViewController+Logger.swift */,
 				2EB528D31FB30ECD00FB912B /* Main.storyboard */,
+				2E3545D11FBE892100A322CD /* TabBar.storyboard */,
+				2E3545D31FBE8BF000A322CD /* TabItemViewController.swift */,
+				2E3545D41FBE8BF000A322CD /* TabItemViewController.xib */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -336,6 +351,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E3545D21FBE892100A322CD /* TabBar.storyboard in Resources */,
+				2E3545D61FBE8BF000A322CD /* TabItemViewController.xib in Resources */,
 				2EB5290E1FB5CBF300FB912B /* UnlockerScene.storyboard in Resources */,
 				2EB528DA1FB30ECD00FB912B /* LaunchScreen.storyboard in Resources */,
 				2EB528D71FB30ECD00FB912B /* Assets.xcassets in Resources */,
@@ -530,12 +547,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E3545D51FBE8BF000A322CD /* TabItemViewController.swift in Sources */,
 				2EB528D21FB30ECD00FB912B /* ViewController.swift in Sources */,
 				2EB529091FB59BFA00FB912B /* Helper.swift in Sources */,
 				2EB529101FB5CC9400FB912B /* UnlockerViewController.swift in Sources */,
 				2EB529141FBA9F1000FB912B /* Helper+String.swift in Sources */,
 				2EB528D01FB30ECD00FB912B /* AppDelegate.swift in Sources */,
+				2E3545D81FBEC3D400A322CD /* ViewController+BLE.swift in Sources */,
 				2EB5290C1FB5CB1100FB912B /* Unlocker.swift in Sources */,
+				2E3545DA1FBEC6AB00A322CD /* ViewController+Logger.swift in Sources */,
 				2EB529021FB4309F00FB912B /* ViewController+UIStyle.swift in Sources */,
 				2EB529001FB4019B00FB912B /* NetService.swift in Sources */,
 			);

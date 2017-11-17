@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -10,32 +10,57 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--FreeOfo-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="FreeOfo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dwc-vD-w5L">
-                                <rect key="frame" x="15" y="497" width="345" height="150"/>
+                                <rect key="frame" x="15" y="69" width="345" height="150"/>
                                 <color key="backgroundColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="8TM-nP-hdQ"/>
                                 </constraints>
                             </scrollView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Qsx-3F-k1j">
+                                <rect key="frame" x="15" y="249" width="345" height="29"/>
+                                <segments>
+                                    <segment title="开锁"/>
+                                    <segment title="查询密码"/>
+                                    <segment title="增加密码"/>
+                                    <segment title="自定义"/>
+                                </segments>
+                            </segmentedControl>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="自定义指令" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uMk-tu-X5n">
+                                <rect key="frame" x="15" y="287" width="345" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="uMk-tu-X5n" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="FOH-6i-BdG"/>
                             <constraint firstItem="dwc-vD-w5L" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="H3d-Rd-OO9"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="dwc-vD-w5L" secondAttribute="bottom" constant="20" id="fhi-Yl-2J5"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="uMk-tu-X5n" secondAttribute="trailing" constant="15" id="PPz-bs-D92"/>
+                            <constraint firstItem="Qsx-3F-k1j" firstAttribute="top" secondItem="dwc-vD-w5L" secondAttribute="bottom" constant="30" id="Pjg-7Y-feD"/>
+                            <constraint firstItem="dwc-vD-w5L" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="25" id="Q7C-ao-Bcv"/>
+                            <constraint firstItem="Qsx-3F-k1j" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="SLx-tZ-0SV"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Qsx-3F-k1j" secondAttribute="trailing" constant="15" id="ejJ-Oy-RbT"/>
+                            <constraint firstItem="uMk-tu-X5n" firstAttribute="top" secondItem="Qsx-3F-k1j" secondAttribute="bottom" constant="10" id="ok1-SW-HFy"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dwc-vD-w5L" secondAttribute="trailing" constant="15" id="tZd-LT-cZf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="FreeOfo" image="ofov2" landscapeImage="ofov2" largeContentSizeImage="ofov2" id="0rp-1k-oSS"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="customCommand" destination="uMk-tu-X5n" id="xZN-8W-Uwd"/>
                         <outlet property="logScrollView" destination="dwc-vD-w5L" id="zeT-Nv-w4E"/>
+                        <outlet property="operationType" destination="Qsx-3F-k1j" id="w72-k1-xIZ"/>
                         <segue destination="5qC-yR-7vq" kind="show" identifier="ForUnlock" id="02K-yT-msz"/>
                     </connections>
                 </viewController>
@@ -51,4 +76,7 @@
             <point key="canvasLocation" x="1096" y="-155"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ofov2" width="25" height="25"/>
+    </resources>
 </document>

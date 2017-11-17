@@ -12,8 +12,15 @@ import SnapKit
 import RxSwift
 import RxCocoa
 import SwiftyJSON
+import CoreBluetooth
+import RxBluetoothKit
 
 class ViewController: UIViewController {
+    
+    let RX_SERVICE_UUID = CBUUID(string: "89560001-b5a3-f393-e0a9-e50e24dcca9e")
+    let RX_CHAR_UUID    = CBUUID(string: "89560003-b5a3-f393-e0a9-e50e24dcca9e")
+    let TX_CHAR_UUID    = CBUUID(string: "89560002-b5a3-f393-e0a9-e50e24dcca9e")
+
     
     let scanBtn = UIButton.init(type: .custom)
     let inputField = UITextField()
@@ -23,47 +30,70 @@ class ViewController: UIViewController {
     
     let evenBus = PublishSubject<Bool>()
     
+    @IBOutlet weak var customCommand: UITextField!
+    @IBOutlet weak var operationType: UISegmentedControl!
     @IBOutlet weak var logScrollView: UIScrollView!
     let disposeBag = DisposeBag()
+    
+    var scanningDisposable: Disposable?
+    var scheduler: ConcurrentDispatchQueueScheduler!
+    
+    fileprivate var peripheralsArray: [ScannedPeripheral] = []
+    fileprivate var connectedPeripherals:[Peripheral] = []
+    fileprivate var servicesList: [Service] = []
+    
+    var isScanInProgress = false
+    var connectedPeripheral: Peripheral?
+    var BLEdisposeBag = DisposeBag()
+    
+    var manager = BluetoothManager(queue: .main)
+    var scannedPeripheral: ScannedPeripheral!
+    var writeCharateristic:Characteristic?
+    
+    var unlocker:Unlocker?
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         initChildView()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
-        self.logScrollView.contentSize.height = 1000
+        let timerQueue = DispatchQueue(label: "io.yunba.timer")
+        scheduler = ConcurrentDispatchQueueScheduler(queue: timerQueue)
+        let stateObservable = manager.rx_state
+        stateObservable.subscribe(onNext: {
+            switch $0{
+            case .poweredOn:
+                return
+            case .poweredOff:
+                self.alertUser(alert: "请打开蓝牙")
+            case .unauthorized:
+                self.alertUser(alert: "请允许使用蓝牙")
+            case .unsupported:
+                self.alertUser(alert: "不支持蓝牙的设备")
+            case .unknown:
+                self.alertUser(alert: "未知蓝牙状态")
+            default:
+                return
+            }
+        }).disposed(by: disposeBag)
+
+//        self.logScrollView.contentSize.height = 1000
         inputField.rx.text
             .map{if $0 != nil {return Int($0!) != nil} else {return false}}
             .bind(to:unlockBtn.rx.isEnabled)
             .disposed(by: disposeBag)
         
         unlockBtn.rx.tap.subscribe(onNext:{ [unowned self] in
-            let timestamp = Date().millisecondsString
-            self.provider.request(.get_with_url_lock(token: Helper.getToken(carno: self.inputField.text!, timestamp: timestamp), carno:self.inputField.text!, timestamp: timestamp)){ result in
-                print(Helper.getToken(carno: self.inputField.text!, timestamp: timestamp))
-                                                        switch result {
-                                                        case let .success(resp):
-                                                            let jsonResp = JSON(resp.data)
-                                                            let log = self.getLogLabel(log: jsonResp.rawString([.castNilToNSNull: true, .jsonSerialization: true])!)
-                                                            print(jsonResp.rawString([.castNilToNSNull: true, .jsonSerialization: true])!)
-                                                            print(log.frame.height)
-                                                            
-                                                            self.logScrollView.addSubview(log)
-                                                            if jsonResp["data"].exists() {
-                                                                self.queryLockInfo(lockSn: jsonResp["data"][0]["sn"].stringValue)
-                                                            }
-                                                        case let .failure(error):
-                                                            print(error)
-                                                        }
-            }
+            self.getWithUrl()
         }).disposed(by: disposeBag)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         //FIXME: set corner radius in the function is not working
         super.viewDidAppear(animated)
-        scanBtn.layer.cornerRadius = scanBtn.bounds.size.width * 0.5
-        print(scanBtn.bounds.size.width)
+//        scanBtn.layer.cornerRadius = scanBtn.bounds.size.width * 0.5
+//        print(scanBtn.bounds.size.width)
     }
 
     override func didReceiveMemoryWarning() {
@@ -73,25 +103,26 @@ class ViewController: UIViewController {
     
     func initChildView() {
         //scan button style
-        scanBtn.addWithStyle(isCircle:true, title: "扫描解锁", backgroundColor: .gray) {
-            self.view.addSubview($0)
-            $0.snp.makeConstraints({(make) -> Void in
-                make.centerX.equalTo(self.view.snp.centerX)
-                make.top.equalTo(self.view.snp.top).offset(60)
-                make.height.equalTo(self.view.snp.height).multipliedBy(0.2)
-                make.width.equalTo(scanBtn.snp.height)
-            })
-        }
+//        scanBtn.addWithStyle(isCircle:true, title: "扫描解锁", backgroundColor: .gray) {
+//            self.view.addSubview($0)
+//            $0.snp.makeConstraints({(make) -> Void in
+//                make.centerX.equalTo(self.view.snp.centerX)
+//                make.top.equalTo(self.view.snp.top).offset(60)
+//                make.height.equalTo(self.view.snp.height).multipliedBy(0.2)
+//                make.width.equalTo(scanBtn.snp.height)
+//            })
+//        }
         
         //input field style
         view.addSubview(inputField)
         inputField.keyboardType = .numberPad
         inputField.font = UIFont.systemFont(ofSize: 40.0)
+        inputField.placeholder = "请输入单车编号"
         inputField.snp.makeConstraints({(make) -> Void in
             make.height.equalTo(view).multipliedBy(0.15)
             make.left.equalTo(view).offset(20)
             make.right.equalTo(view).offset(-20)
-            make.top.equalTo(scanBtn.snp.bottom).offset(30)
+            make.top.equalTo(customCommand.snp.bottom).offset(10)
         })
         inputField.setBottomBorder()
         
@@ -111,6 +142,27 @@ class ViewController: UIViewController {
         unlockBtn.setTitleColor(.blue, for: .disabled)
     }
     
+    func getWithUrl(){
+        let timestamp = Date().millisecondsString
+        self.provider.request(.get_with_url_lock(token: Helper.getToken(carno: self.inputField.text!, timestamp: timestamp), carno:self.inputField.text!, timestamp: timestamp)){ result in
+            print(Helper.getToken(carno: self.inputField.text!, timestamp: timestamp))
+            switch result {
+            case let .success(resp):
+                let jsonResp = JSON(resp.data)
+                let log = self.getLogLabel(log: jsonResp.rawString([.castNilToNSNull: true, .jsonSerialization: true])!)
+                print(jsonResp.rawString([.castNilToNSNull: true, .jsonSerialization: true])!)
+                print(log.frame.height)
+                
+                self.logScrollView.addSubview(log)
+                if jsonResp["data"].exists() {
+                    self.queryLockInfo(lockSn: jsonResp["data"][0]["sn"].stringValue)
+                }
+            case let .failure(error):
+                print(error)
+            }
+        }
+    }
+    
     func queryLockInfo(lockSn: String){
         provider.request(.query_info(lockSn: lockSn), completion: { result in
             switch result {
@@ -120,7 +172,20 @@ class ViewController: UIViewController {
                     let macAddr = jsonResp["data"][0]["mac"].stringValue
                     let deviceToken = jsonResp["data"][0]["device_token"].stringValue
                     print("macAddr:\(macAddr); deviceToken:\(deviceToken)")
-                    self.performSegue(withIdentifier: "ForUnlock", sender: Unlocker(mac: macAddr, device_token: deviceToken))
+                    var op:UnlockOperation?
+                    switch self.operationType.selectedSegmentIndex {
+                        case 0:
+                            op = .unlock
+                        case 1:
+                            op = .queryPassword
+                        case 2:
+                            op = .setPassword
+                        default:
+                            op = nil
+                    }
+                    self.unlocker = Unlocker(mac: macAddr, device_token: deviceToken, operation: op)
+                    self.startScanning()
+//                    self.performSegue(withIdentifier: "ForUnlock", sender: Unlocker(mac: macAddr, device_token: deviceToken, operation: nil))
                 }
             case .failure(_):
                 break
@@ -134,15 +199,15 @@ class ViewController: UIViewController {
     }
 
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let identifier = segue.identifier else {return}
-        if identifier == "ForUnlock" {
-            let unlockViewController = segue.destination as! UnlockerViewController
-            if let unlocker = sender as? Unlocker {
-                unlockViewController.unlocker = unlocker
-            }
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        guard let identifier = segue.identifier else {return}
+//        if identifier == "ForUnlock" {
+//            let unlockViewController = segue.destination as! UnlockerViewController
+//            if let unlocker = sender as? Unlocker {
+//                unlockViewController.unlocker = unlocker
+//            }
+//        }
+//    }
 }
 
 //Date helper
