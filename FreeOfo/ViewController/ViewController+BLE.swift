@@ -64,9 +64,10 @@ extension ViewController {
     private func monitorDisconnection(for peripheral: Peripheral) {
         manager.monitorDisconnection(for: peripheral)
             .subscribe(onNext: { [weak self] (peripheral) in
-                let alert = UIAlertController(title: "Disconnected!", message: "Peripheral Disconnected", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                self?.present(alert, animated: true, completion: nil)
+//                let alert = UIAlertController(title: "Disconnected!", message: "Peripheral Disconnected", preferredStyle: .alert)
+//                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//                self?.present(alert, animated: true, completion: nil)
+                self?.logger(log: "Peripheral Disconnected", level: .error)
             }).disposed(by: BLEdisposeBag)
     }
     

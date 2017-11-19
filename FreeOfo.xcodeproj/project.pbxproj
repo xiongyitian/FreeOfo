@@ -114,6 +114,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2E3545DB1FBEE98900A322CD /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				2E3545D11FBE892100A322CD /* TabBar.storyboard */,
+				2E3545D31FBE8BF000A322CD /* TabItemViewController.swift */,
+				2E3545D41FBE8BF000A322CD /* TabItemViewController.xib */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
 		2EB528C31FB30ECD00FB912B = {
 			isa = PBXGroup;
 			children = (
@@ -140,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				2EB528FF1FB4019B00FB912B /* NetService.swift */,
+				2E3545DB1FBEE98900A322CD /* TabBar */,
 				2EB529151FBA9F1500FB912B /* Helper */,
 				2EB528CF1FB30ECD00FB912B /* AppDelegate.swift */,
 				2EB5290B1FB5CB1000FB912B /* Unlocker.swift */,
@@ -180,9 +191,6 @@
 				2EB529011FB4309F00FB912B /* ViewController+UIStyle.swift */,
 				2E3545D91FBEC6AB00A322CD /* ViewController+Logger.swift */,
 				2EB528D31FB30ECD00FB912B /* Main.storyboard */,
-				2E3545D11FBE892100A322CD /* TabBar.storyboard */,
-				2E3545D31FBE8BF000A322CD /* TabItemViewController.swift */,
-				2E3545D41FBE8BF000A322CD /* TabItemViewController.xib */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";

@@ -30,10 +30,15 @@ class ViewController: UIViewController {
     
     let evenBus = PublishSubject<Bool>()
     
+    @IBOutlet weak var outerScrollView: UIScrollView!
+    @IBOutlet weak var tabBarItem1: UITabBarItem!
+    @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var customCommand: UITextField!
     @IBOutlet weak var operationType: UISegmentedControl!
     @IBOutlet weak var logScrollView: UIScrollView!
     let disposeBag = DisposeBag()
+    var activeTextField: UITextField?
+
     
     var scanningDisposable: Disposable?
     var scheduler: ConcurrentDispatchQueueScheduler!
@@ -55,6 +60,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        contentView.frame.size.height = view.frame.size.height - 80.0
         initChildView()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -89,6 +95,17 @@ class ViewController: UIViewController {
         }).disposed(by: disposeBag)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        addKeyboradShowOrHideObserver()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        removeKeyboradShowOrHideObserver()
+    }
+
+    
     override func viewDidAppear(_ animated: Bool) {
         //FIXME: set corner radius in the function is not working
         super.viewDidAppear(animated)
@@ -114,10 +131,10 @@ class ViewController: UIViewController {
 //        }
         
         //input field style
-        view.addSubview(inputField)
+        contentView.addSubview(inputField)
         inputField.keyboardType = .numberPad
         inputField.font = UIFont.systemFont(ofSize: 40.0)
-        inputField.placeholder = "请输入单车编号"
+        inputField.placeholder = "单车编号"
         inputField.snp.makeConstraints({(make) -> Void in
             make.height.equalTo(view).multipliedBy(0.15)
             make.left.equalTo(view).offset(20)
@@ -128,12 +145,13 @@ class ViewController: UIViewController {
         
         //unlock button style
         unlockBtn.addWithStyle(isCircle: false, title: "点击解锁", backgroundColor: .white) {
-            self.view.addSubview($0)
+            self.contentView.addSubview($0)
             $0.snp.makeConstraints({(make) -> Void in
-                make.top.equalTo(inputField.snp.bottom).offset(20)
-                make.left.equalTo(view).offset(40)
-                make.right.equalTo(view).offset(-40)
+               // make.top.greaterThanOrEqualTo(inputField.snp.bottom).offset(40)
+                make.left.equalTo(self.contentView).offset(40)
+                make.right.equalTo(self.contentView).offset(-40)
                 make.height.equalTo(40)
+                make.bottom.equalTo(self.view.snp.bottom).offset(-95)
             })
             $0.layer.borderWidth = 2.0
             $0.layer.borderColor = UIColor.gray.cgColor
@@ -197,8 +215,53 @@ class ViewController: UIViewController {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
-
     
+    func addKeyboradShowOrHideObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillBeHidden(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    func removeKeyboradShowOrHideObserver() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func keyboardWasShown(notification: NSNotification)
+    {
+        //Need to calculate keyboard exact size due to Apple suggestions
+        self.outerScrollView.isScrollEnabled = true
+        let info : NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
+        let contentInsets : UIEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize!.height, 0.0)
+        
+        self.outerScrollView.contentInset = contentInsets
+        self.outerScrollView.scrollIndicatorInsets = contentInsets
+        
+        var aRect : CGRect = self.view.frame
+        aRect.size.height -= keyboardSize!.height
+        if activeTextField != nil
+        {
+            if (!aRect.contains(activeTextField!.frame.origin))
+            {
+                self.outerScrollView.scrollRectToVisible(activeTextField!.frame, animated: true)
+            }
+        }
+    }
+    
+    @objc func keyboardWillBeHidden(notification: NSNotification)
+    {
+        //Once keyboard disappears, restore original positions
+        //        let info : NSDictionary = notification.userInfo! as NSDictionary
+        //        let keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
+        //        let contentInsets : UIEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, -keyboardSize!.height, 0.0)
+        //        self.outerScrollView.contentInset = contentInsets
+        //        self.outerScrollView.scrollIndicatorInsets = contentInsets
+        //        self.view.endEditing(true)
+        //        self.outerScrollView.isScrollEnabled = true
+        self.outerScrollView.contentInset = UIEdgeInsets.zero
+        self.outerScrollView.scrollIndicatorInsets = UIEdgeInsets.zero
+        self.view.endEditing(true)
+    }
+
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        guard let identifier = segue.identifier else {return}
 //        if identifier == "ForUnlock" {
