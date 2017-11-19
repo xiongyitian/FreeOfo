@@ -147,11 +147,11 @@ class ViewController: UIViewController {
         unlockBtn.addWithStyle(isCircle: false, title: "点击解锁", backgroundColor: .white) {
             self.contentView.addSubview($0)
             $0.snp.makeConstraints({(make) -> Void in
-               // make.top.greaterThanOrEqualTo(inputField.snp.bottom).offset(40)
+                make.top.greaterThanOrEqualTo(inputField.snp.bottom).offset(10)
                 make.left.equalTo(self.contentView).offset(40)
                 make.right.equalTo(self.contentView).offset(-40)
                 make.height.equalTo(40)
-                make.bottom.equalTo(self.view.snp.bottom).offset(-95)
+                make.bottom.equalTo(self.view.snp.bottom).offset(-75)
             })
             $0.layer.borderWidth = 2.0
             $0.layer.borderColor = UIColor.gray.cgColor
@@ -167,11 +167,9 @@ class ViewController: UIViewController {
             switch result {
             case let .success(resp):
                 let jsonResp = JSON(resp.data)
-                let log = self.getLogLabel(log: jsonResp.rawString([.castNilToNSNull: true, .jsonSerialization: true])!)
                 print(jsonResp.rawString([.castNilToNSNull: true, .jsonSerialization: true])!)
-                print(log.frame.height)
                 
-                self.logScrollView.addSubview(log)
+                self.logger(log: "get data: \(jsonResp["data"][0]["sn"].stringValue)", level: .info)
                 if jsonResp["data"].exists() {
                     self.queryLockInfo(lockSn: jsonResp["data"][0]["sn"].stringValue)
                 }

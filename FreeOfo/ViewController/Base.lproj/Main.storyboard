@@ -26,14 +26,14 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="499"/>
                                         <subviews>
                                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dwc-vD-w5L">
-                                                <rect key="frame" x="15" y="10" width="290" height="199.5"/>
+                                                <rect key="frame" x="15" y="10" width="290" height="249.5"/>
                                                 <color key="backgroundColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="150" id="3HN-SD-ZLg"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="999" constant="250" id="3HN-SD-ZLg"/>
                                                 </constraints>
                                             </scrollView>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="自定义指令" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uMk-tu-X5n">
-                                                <rect key="frame" x="15" y="257.5" width="290" height="30"/>
+                                                <rect key="frame" x="15" y="307.5" width="290" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="ZIi-ji-0EY"/>
                                                 </constraints>
@@ -42,7 +42,7 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Qsx-3F-k1j">
-                                                <rect key="frame" x="15" y="219.5" width="290" height="29"/>
+                                                <rect key="frame" x="15" y="269.5" width="290" height="29"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="28" id="NBG-OV-d8P"/>
                                                 </constraints>
@@ -64,7 +64,7 @@
                                             <constraint firstItem="Qsx-3F-k1j" firstAttribute="leading" secondItem="KWH-Wb-CcS" secondAttribute="leading" constant="15" id="dPP-xj-268"/>
                                             <constraint firstItem="uMk-tu-X5n" firstAttribute="leading" secondItem="KWH-Wb-CcS" secondAttribute="leading" constant="15" id="gzn-vL-PF0"/>
                                             <constraint firstAttribute="trailing" secondItem="Qsx-3F-k1j" secondAttribute="trailing" constant="15" id="v4y-ad-xCT"/>
-                                            <constraint firstItem="dwc-vD-w5L" firstAttribute="height" secondItem="KWH-Wb-CcS" secondAttribute="height" multiplier="0.4" id="xvV-hr-kGw"/>
+                                            <constraint firstItem="dwc-vD-w5L" firstAttribute="height" secondItem="KWH-Wb-CcS" secondAttribute="height" multiplier="0.5" id="xvV-hr-kGw"/>
                                             <constraint firstAttribute="trailing" secondItem="uMk-tu-X5n" secondAttribute="trailing" constant="15" id="zrm-R4-31I"/>
                                         </constraints>
                                     </view>
