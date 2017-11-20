@@ -171,7 +171,7 @@ extension ViewController {
     }
     
     func alertUser(alert:String) {
-        let alert = UIAlertController(title: "Disconnected!", message: alert, preferredStyle: .alert)
+        let alert = UIAlertController(title: "Error!", message: alert, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }

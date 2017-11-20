@@ -168,11 +168,14 @@ class ViewController: UIViewController {
                 print(jsonResp.rawString([.castNilToNSNull: true, .jsonSerialization: true])!)
                 
                 self.logger(log: "get data: \(jsonResp["data"][0]["sn"].stringValue)", level: .info)
-                if jsonResp["data"].exists() {
+                if jsonResp["data"][0].exists() {
                     self.queryLockInfo(lockSn: jsonResp["data"][0]["sn"].stringValue)
+                } else {
+                    self.alertUser(alert: "wrong bike number")
                 }
             case let .failure(error):
                 print(error)
+                self.alertUser(alert: "netWork error")
             }
         }
     }
