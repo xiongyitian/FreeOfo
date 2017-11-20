@@ -20,14 +20,16 @@ extension ViewController {
         print("scaning")
         scanningDisposable = manager.rx_state
             .filter { $0 == .poweredOn }
+//            .timeout(4.0, scheduler: scheduler)
             .take(1)
-            .timeout(4.0, scheduler: scheduler)
-            .flatMap { _ in self.manager.scanForPeripherals(withServices: [self.RX_SERVICE_UUID], options: nil) }
+            .flatMap { _ in self.manager.scanForPeripherals(withServices: [self.RX_SERVICE_UUID], options: nil).timeout(4.0, scheduler: MainScheduler.instance) }
             .subscribeOn(MainScheduler.instance)
             .subscribe(onNext: {
                 self.addNewScannedPeripheral($0)
             }, onError: { error in
                 print("error accur - scaning: \(error.localizedDescription)")
+                self.logger(log: "can't find peripheral! Stopped scaning", level: .error)
+                self.stopScaning()
             })
     }
 
@@ -57,7 +59,8 @@ extension ViewController {
                 self.connectedPeripheral = $0
                 self.monitorDisconnection(for: $0)
                 self.downloadServices(for: $0)
-                }, onError: { _ in
+                }, onError: { (error) in
+                    print("connection error, \(error.localizedDescription)")
             }).disposed(by: BLEdisposeBag)
     }
     
@@ -112,6 +115,8 @@ extension ViewController {
                             command = self.customCommand.text ?? ""
                         }
                         self.writeCommand(characteristic: self.writeCharateristic!, command: command)
+                    } else {
+                        self.logger(log: lockStatus, level: .good)
                     }
                 }
             }).disposed(by: BLEdisposeBag)
@@ -150,6 +155,12 @@ extension ViewController {
                     print("ongoing")
                 }
             }.disposed(by: BLEdisposeBag)
+    }
+    
+    private func stopScaning() {
+        scanningDisposable?.dispose()
+        isScanInProgress = false
+        unlockBtn.isEnabled = true
     }
     
     private func cancleConnect() {

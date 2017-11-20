@@ -60,7 +60,6 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        contentView.frame.size.height = view.frame.size.height - 80.0
         initChildView()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -84,7 +83,6 @@ class ViewController: UIViewController {
             }
         }).disposed(by: disposeBag)
 
-//        self.logScrollView.contentSize.height = 1000
         inputField.rx.text
             .map{if $0 != nil {return Int($0!) != nil} else {return false}}
             .bind(to:unlockBtn.rx.isEnabled)
@@ -153,11 +151,11 @@ class ViewController: UIViewController {
                 make.height.equalTo(40)
                 make.bottom.equalTo(self.view.snp.bottom).offset(-75)
             })
-            $0.layer.borderWidth = 2.0
-            $0.layer.borderColor = UIColor.gray.cgColor
+            $0.layer.cornerRadius = 5.0
         }
-        unlockBtn.setTitleColor(.gray, for: .normal)
-        unlockBtn.setTitleColor(.blue, for: .disabled)
+        unlockBtn.setTitleColor(.white, for: .normal)
+//        unlockBtn.backgroundColor = UIColor.init(red: 26, green: 173, blue: 25, alpha: 1)
+//        unlockBtn.setTitleColor(.blue, for: .disabled)
     }
     
     func getWithUrl(){

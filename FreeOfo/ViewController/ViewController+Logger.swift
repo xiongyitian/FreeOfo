@@ -12,7 +12,6 @@ import UIKit
 extension ViewController {
     func logger(log: String, level:logLevel) {
         let logLabel = UILabel(frame: CGRect(x: 0, y: ((self.logScrollView.subviews.count - 2) * 20), width: Int(self.logScrollView.bounds.width), height: 20))
-        print(self.logScrollView.subviews.count)
         logLabel.numberOfLines = 14
         logLabel.lineBreakMode = .byTruncatingMiddle
         logLabel.text = log
