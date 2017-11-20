@@ -60,7 +60,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        contentView.frame.size.height = view.frame.size.height - 80.0
+//        contentView.frame.size.height = view.frame.size.height - 80.0
         initChildView()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -227,15 +227,15 @@ class ViewController: UIViewController {
     {
         //Need to calculate keyboard exact size due to Apple suggestions
         self.outerScrollView.isScrollEnabled = true
-        let info : NSDictionary = notification.userInfo! as NSDictionary
-        let keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
-        let contentInsets : UIEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize!.height, 0.0)
+//        let info : NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardSize = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.size
+        let contentInsets : UIEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0)
         
         self.outerScrollView.contentInset = contentInsets
         self.outerScrollView.scrollIndicatorInsets = contentInsets
         
         var aRect : CGRect = self.view.frame
-        aRect.size.height -= keyboardSize!.height
+        aRect.size.height -= keyboardSize.height
         if activeTextField != nil
         {
             if (!aRect.contains(activeTextField!.frame.origin))
@@ -248,16 +248,17 @@ class ViewController: UIViewController {
     @objc func keyboardWillBeHidden(notification: NSNotification)
     {
         //Once keyboard disappears, restore original positions
-        //        let info : NSDictionary = notification.userInfo! as NSDictionary
-        //        let keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
-        //        let contentInsets : UIEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, -keyboardSize!.height, 0.0)
-        //        self.outerScrollView.contentInset = contentInsets
-        //        self.outerScrollView.scrollIndicatorInsets = contentInsets
-        //        self.view.endEditing(true)
-        //        self.outerScrollView.isScrollEnabled = true
-        self.outerScrollView.contentInset = UIEdgeInsets.zero
-        self.outerScrollView.scrollIndicatorInsets = UIEdgeInsets.zero
+//        let info : NSDictionary = notification.userInfo! as NSDictionary
+//        let keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
+        let keyboardSize = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.size
+        let contentInsets : UIEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, -keyboardSize.height, 0.0)
+        self.outerScrollView.contentInset = contentInsets
+        self.outerScrollView.scrollIndicatorInsets = contentInsets
         self.view.endEditing(true)
+        self.outerScrollView.isScrollEnabled = true
+//        self.outerScrollView.contentInset = UIEdgeInsets.zero
+//        self.outerScrollView.scrollIndicatorInsets = UIEdgeInsets.zero
+//        self.view.endEditing(true)
     }
 
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
