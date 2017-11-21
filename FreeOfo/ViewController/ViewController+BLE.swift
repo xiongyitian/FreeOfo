@@ -16,7 +16,7 @@ extension ViewController {
     func startScanning() {
         isScanInProgress = true
         unlockBtn.isEnabled = false
-        logger(log: "scaning", level: .good)
+        logger(log: "scaning for peripheral", level: .good)
         print("scaning")
         scanningDisposable = manager.rx_state
             .filter { $0 == .poweredOn }
@@ -39,11 +39,11 @@ extension ViewController {
             let index = dataString.index(dataString.startIndex, offsetBy: 4)
             let scanedMacAddr = dataString[index...]
             
-            logger(log: "scaned : \(scanedMacAddr)", level: .info)
             print("scaned : \(scanedMacAddr)")
             if let macAddr = unlocker?.macAddr.upsideDownMac {
-                logger(log: "got macAddr in ofo \(macAddr)", level: .good)
+//                logger(log: "got macAddr in ofo \(macAddr)", level: .good)
                 if macAddr.lowercased() == scanedMacAddr {
+                    logger(log: "scaned peripheral: \(scanedMacAddr)", level: .good)
                     connectForUnlocking(peripheral: peripheral)
                     scanningDisposable?.dispose()
                 }
@@ -97,6 +97,7 @@ extension ViewController {
             .flatMap { Observable.from($0) }
             .subscribe(onNext: { chart in
                 self.writeCharateristic = chart
+                self.logger(log: "wirting token to peripheral", level: .good)
                 self.write2Characteristic(characteristic: chart, data: self.unlocker!.device_token.data(using: .utf8)!)
             }).disposed(by: BLEdisposeBag)
     }
@@ -107,7 +108,7 @@ extension ViewController {
                 let newValue = $0.value
                 if let lockStatus = String(data: newValue!, encoding:.utf8) {
                     if lockStatus == "ok" {
-                        self.logger(log: "got ok", level: .good)
+                        self.logger(log: "[write token] got peripheral response ok", level: .good)
                         var command = String()
                         if let cmd = self.unlocker!.unlockOperation {
                             command = cmd.rawValue
@@ -128,7 +129,7 @@ extension ViewController {
                 //respond to errors / successful write
                 switch event {
                 case .completed:
-                    self.logger(log: "completed !", level: .good)
+                    self.logger(log: "write token completed!", level: .good)
                 case .error(_):
                     return
                 case .next(let chart):
@@ -144,7 +145,7 @@ extension ViewController {
             .subscribe{ event in
                 switch event {
                 case .completed:
-                    print("completed! ")
+                    print("write unlock command to peripheral completed!")
                     self.connectedPeripheral!.cancelConnection().subscribe{ event in
                         print("disconnected! ")
                         self.cancleConnect()

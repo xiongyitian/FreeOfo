@@ -145,11 +145,11 @@ class ViewController: UIViewController {
         unlockBtn.addWithStyle(isCircle: false, title: "点击解锁", backgroundColor: .white) {
             self.contentView.addSubview($0)
             $0.snp.makeConstraints({(make) -> Void in
-                make.top.greaterThanOrEqualTo(inputField.snp.bottom).offset(10)
+                make.top.equalTo(inputField.snp.bottom).offset(10)
                 make.left.equalTo(self.contentView).offset(40)
                 make.right.equalTo(self.contentView).offset(-40)
                 make.height.equalTo(40)
-                make.bottom.equalTo(self.view.snp.bottom).offset(-75)
+                make.bottom.lessThanOrEqualTo(self.view.snp.bottom).offset(-75)
             })
             $0.layer.cornerRadius = 5.0
         }
@@ -167,7 +167,7 @@ class ViewController: UIViewController {
                 let jsonResp = JSON(resp.data)
                 print(jsonResp.rawString([.castNilToNSNull: true, .jsonSerialization: true])!)
                 
-                self.logger(log: "get data: \(jsonResp["data"][0]["sn"].stringValue)", level: .info)
+                self.logger(log: jsonResp.rawString([.castNilToNSNull: true, .jsonSerialization: true])!, level: .info)
                 if jsonResp["data"][0].exists() {
                     self.queryLockInfo(lockSn: jsonResp["data"][0]["sn"].stringValue)
                 } else {
@@ -185,10 +185,11 @@ class ViewController: UIViewController {
             switch result {
             case let .success(resp):
                 let jsonResp = JSON(resp.data)
+                self.logger(log: jsonResp.rawString([.castNilToNSNull: true, .jsonSerialization: true])!, level: .good)
                 if jsonResp["data"].exists() {
                     let macAddr = jsonResp["data"][0]["mac"].stringValue
                     let deviceToken = jsonResp["data"][0]["device_token"].stringValue
-                    print("macAddr:\(macAddr); deviceToken:\(deviceToken)")
+//                    self.logger(log: "macAddr:\(macAddr); deviceToken:\(deviceToken)", level: .good)
                     var op:UnlockOperation?
                     switch self.operationType.selectedSegmentIndex {
                         case 0:
