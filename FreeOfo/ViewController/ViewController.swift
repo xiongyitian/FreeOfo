@@ -60,6 +60,9 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let sqlManager = SqlManager()
+        print("open database", sqlManager.openDatabase())
+        print("creat datebase",sqlManager.createDatabase())
         initChildView()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -159,23 +162,49 @@ class ViewController: UIViewController {
     }
     
     func getWithUrl(){
-        let timestamp = Date().millisecondsString
-        self.provider.request(.get_with_url_lock(token: Helper.getToken(carno: self.inputField.text!, timestamp: timestamp), carno:self.inputField.text!, timestamp: timestamp)){ result in
-            print(Helper.getToken(carno: self.inputField.text!, timestamp: timestamp))
-            switch result {
-            case let .success(resp):
-                let jsonResp = JSON(resp.data)
-                print(jsonResp.rawString([.castNilToNSNull: true, .jsonSerialization: true])!)
-                
-                self.logger(log: jsonResp.rawString([.castNilToNSNull: true, .jsonSerialization: true])!, level: .info)
-                if jsonResp["data"][0].exists() {
-                    self.queryLockInfo(lockSn: jsonResp["data"][0]["sn"].stringValue)
-                } else {
-                    self.alertUser(alert: "wrong bike number")
+        guard Int(self.inputField.text ?? "") != nil else {
+            self.alertUser(alert: "wrong bike number")
+            return
+        }
+        if let bikeInfo = SqlManager.shared.queryInfo(bikeId: Int(self.inputField.text ?? "")!) {
+            logger(log: "get info from database", level: .good)
+            if bikeInfo.count == 1 {
+                var op:UnlockOperation?
+                switch self.operationType.selectedSegmentIndex {
+                case 0:
+                    op = .unlock
+                case 1:
+                    op = .queryPassword
+                case 2:
+                    op = .setPassword
+                default:
+                    op = nil
                 }
-            case let .failure(error):
-                print(error)
-                self.alertUser(alert: "netWork error")
+                self.unlocker = Unlocker(mac: bikeInfo[0].macAddr, device_token: bikeInfo[0].token, operation: op)
+                self.startScanning()
+            } else {
+                print(bikeInfo)
+                //TODO: notify user
+            }
+        } else {
+            let timestamp = Date().millisecondsString
+            self.provider.request(.get_with_url_lock(token: Helper.getToken(carno: self.inputField.text!, timestamp: timestamp), carno:self.inputField.text!, timestamp: timestamp)){ result in
+                print(Helper.getToken(carno: self.inputField.text!, timestamp: timestamp))
+                switch result {
+                case let .success(resp):
+                    let jsonResp = JSON(resp.data)
+                    print(jsonResp.rawString([.castNilToNSNull: true, .jsonSerialization: true])!)
+                    
+                    self.logger(log: jsonResp.rawString([.castNilToNSNull: true, .jsonSerialization: true])!, level: .info)
+                    if jsonResp["data"][0].exists() {
+                        self.queryLockInfo(lockSn: jsonResp["data"][0]["sn"].stringValue)
+                    } else {
+                        self.alertUser(alert: "wrong bike number")
+                    }
+                case let .failure(error):
+                    print(error)
+                    self.alertUser(alert: "netWork error")
+                }
             }
         }
     }
@@ -185,7 +214,8 @@ class ViewController: UIViewController {
             switch result {
             case let .success(resp):
                 let jsonResp = JSON(resp.data)
-                self.logger(log: jsonResp.rawString([.castNilToNSNull: true, .jsonSerialization: true])!, level: .good)
+                let infoRawData = jsonResp.rawString([.castNilToNSNull: true, .jsonSerialization: true])!
+                self.logger(log: infoRawData, level: .good)
                 if jsonResp["data"].exists() {
                     let macAddr = jsonResp["data"][0]["mac"].stringValue
                     let deviceToken = jsonResp["data"][0]["device_token"].stringValue
@@ -201,12 +231,16 @@ class ViewController: UIViewController {
                         default:
                             op = nil
                     }
+                    let _bikeInfo = bikeInfo(bikeId: Int(self.inputField.text ?? "")!, macAddr: macAddr, token: deviceToken, rawData: infoRawData)
+                    SqlManager.shared.insertBikeInfo(bikeId: _bikeInfo.bikeId, macAddr: "\"" + _bikeInfo.macAddr + "\"", token: "\"" + _bikeInfo.token + "\"", rawData: _bikeInfo.rawData.data(using: .utf8)!)
+                    //.replacingOccurrences(of: "{", with: "\\{").replacingOccurrences(of: "}", with: "\\}")
                     self.unlocker = Unlocker(mac: macAddr, device_token: deviceToken, operation: op)
                     self.startScanning()
 //                    self.performSegue(withIdentifier: "ForUnlock", sender: Unlocker(mac: macAddr, device_token: deviceToken, operation: nil))
                 }
-            case .failure(_):
-                break
+            case let .failure(error):
+                print(error.localizedDescription)
+                self.alertUser(alert: "netWork error")
             }
         })
     }

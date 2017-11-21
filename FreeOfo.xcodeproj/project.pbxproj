@@ -14,6 +14,8 @@
 		2E3545D81FBEC3D400A322CD /* ViewController+BLE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3545D71FBEC3D400A322CD /* ViewController+BLE.swift */; };
 		2E3545DA1FBEC6AB00A322CD /* ViewController+Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3545D91FBEC6AB00A322CD /* ViewController+Logger.swift */; };
 		2E3545DD1FC417F300A322CD /* SqliteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3545DC1FC417F300A322CD /* SqliteManager.swift */; };
+		2E3545DF1FC423A900A322CD /* SqlDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3545DE1FC423A900A322CD /* SqlDSL.swift */; };
+		2E3545E11FC432EA00A322CD /* BikeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3545E01FC432EA00A322CD /* BikeInfo.swift */; };
 		2EB528D01FB30ECD00FB912B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB528CF1FB30ECD00FB912B /* AppDelegate.swift */; };
 		2EB528D21FB30ECD00FB912B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB528D11FB30ECD00FB912B /* ViewController.swift */; };
 		2EB528D51FB30ECD00FB912B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EB528D31FB30ECD00FB912B /* Main.storyboard */; };
@@ -57,6 +59,8 @@
 		2E3545D71FBEC3D400A322CD /* ViewController+BLE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+BLE.swift"; sourceTree = "<group>"; };
 		2E3545D91FBEC6AB00A322CD /* ViewController+Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Logger.swift"; sourceTree = "<group>"; };
 		2E3545DC1FC417F300A322CD /* SqliteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqliteManager.swift; sourceTree = "<group>"; };
+		2E3545DE1FC423A900A322CD /* SqlDSL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqlDSL.swift; sourceTree = "<group>"; };
+		2E3545E01FC432EA00A322CD /* BikeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BikeInfo.swift; sourceTree = "<group>"; };
 		2EB528CC1FB30ECD00FB912B /* FreeOfo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FreeOfo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EB528CF1FB30ECD00FB912B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2EB528D11FB30ECD00FB912B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -152,6 +156,8 @@
 			isa = PBXGroup;
 			children = (
 				2E3545DC1FC417F300A322CD /* SqliteManager.swift */,
+				2E3545DE1FC423A900A322CD /* SqlDSL.swift */,
+				2E3545E01FC432EA00A322CD /* BikeInfo.swift */,
 				2EB528FF1FB4019B00FB912B /* NetService.swift */,
 				2E3545DB1FBEE98900A322CD /* TabBar */,
 				2EB529151FBA9F1500FB912B /* Helper */,
@@ -560,12 +566,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E3545E11FC432EA00A322CD /* BikeInfo.swift in Sources */,
 				2E3545D51FBE8BF000A322CD /* TabItemViewController.swift in Sources */,
 				2EB528D21FB30ECD00FB912B /* ViewController.swift in Sources */,
 				2EB529091FB59BFA00FB912B /* Helper.swift in Sources */,
 				2E3545DD1FC417F300A322CD /* SqliteManager.swift in Sources */,
 				2EB529101FB5CC9400FB912B /* UnlockerViewController.swift in Sources */,
 				2EB529141FBA9F1000FB912B /* Helper+String.swift in Sources */,
+				2E3545DF1FC423A900A322CD /* SqlDSL.swift in Sources */,
 				2EB528D01FB30ECD00FB912B /* AppDelegate.swift in Sources */,
 				2E3545D81FBEC3D400A322CD /* ViewController+BLE.swift in Sources */,
 				2EB5290C1FB5CB1100FB912B /* Unlocker.swift in Sources */,
