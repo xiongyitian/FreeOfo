@@ -1,5 +1,8 @@
 PODS:
   - Alamofire (4.5.1)
+  - FMDB (2.7.2):
+    - FMDB/standard (= 2.7.2)
+  - FMDB/standard (2.7.2)
   - Moya/Core (10.0.0):
     - Alamofire (~> 4.1)
     - Result (~> 3.0)
@@ -17,6 +20,7 @@ PODS:
   - Toast-Swift (2.0.0)
 
 DEPENDENCIES:
+  - FMDB
   - Moya/RxSwift
   - RxBluetoothKit
   - RxCocoa
@@ -26,6 +30,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  FMDB: 6198a90e7b6900cfc046e6bc0ef6ebb7be9236aa
   Moya: adb58b0f4e58430db43cc6e2f6ebab1836501186
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
   RxBluetoothKit: 65b56c51c023078bf5cdf56d07c6e16dcb60546d
@@ -35,6 +40,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
   Toast-Swift: 5b2f8f720f7e78e48511f693df1f9c9a6e38a25a
 
-PODFILE CHECKSUM: a5e371f88df2b7c5ba37d7c86bb663cfbed93b4f
+PODFILE CHECKSUM: ae2bc2e34178aa82df8e0222d21e3fdd69c6f9e4
 
 COCOAPODS: 1.4.0.beta.2

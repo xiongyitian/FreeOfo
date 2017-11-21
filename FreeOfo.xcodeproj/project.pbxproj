@@ -13,6 +13,7 @@
 		2E3545D61FBE8BF000A322CD /* TabItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E3545D41FBE8BF000A322CD /* TabItemViewController.xib */; };
 		2E3545D81FBEC3D400A322CD /* ViewController+BLE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3545D71FBEC3D400A322CD /* ViewController+BLE.swift */; };
 		2E3545DA1FBEC6AB00A322CD /* ViewController+Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3545D91FBEC6AB00A322CD /* ViewController+Logger.swift */; };
+		2E3545DD1FC417F300A322CD /* SqliteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3545DC1FC417F300A322CD /* SqliteManager.swift */; };
 		2EB528D01FB30ECD00FB912B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB528CF1FB30ECD00FB912B /* AppDelegate.swift */; };
 		2EB528D21FB30ECD00FB912B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB528D11FB30ECD00FB912B /* ViewController.swift */; };
 		2EB528D51FB30ECD00FB912B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EB528D31FB30ECD00FB912B /* Main.storyboard */; };
@@ -55,6 +56,7 @@
 		2E3545D41FBE8BF000A322CD /* TabItemViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TabItemViewController.xib; sourceTree = "<group>"; };
 		2E3545D71FBEC3D400A322CD /* ViewController+BLE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+BLE.swift"; sourceTree = "<group>"; };
 		2E3545D91FBEC6AB00A322CD /* ViewController+Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Logger.swift"; sourceTree = "<group>"; };
+		2E3545DC1FC417F300A322CD /* SqliteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqliteManager.swift; sourceTree = "<group>"; };
 		2EB528CC1FB30ECD00FB912B /* FreeOfo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FreeOfo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EB528CF1FB30ECD00FB912B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2EB528D11FB30ECD00FB912B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 		2EB528CE1FB30ECD00FB912B /* FreeOfo */ = {
 			isa = PBXGroup;
 			children = (
+				2E3545DC1FC417F300A322CD /* SqliteManager.swift */,
 				2EB528FF1FB4019B00FB912B /* NetService.swift */,
 				2E3545DB1FBEE98900A322CD /* TabBar */,
 				2EB529151FBA9F1500FB912B /* Helper */,
@@ -441,6 +444,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-FreeOfo/Pods-FreeOfo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/RxBluetoothKit/RxBluetoothKit.framework",
@@ -453,6 +457,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxBluetoothKit.framework",
@@ -558,6 +563,7 @@
 				2E3545D51FBE8BF000A322CD /* TabItemViewController.swift in Sources */,
 				2EB528D21FB30ECD00FB912B /* ViewController.swift in Sources */,
 				2EB529091FB59BFA00FB912B /* Helper.swift in Sources */,
+				2E3545DD1FC417F300A322CD /* SqliteManager.swift in Sources */,
 				2EB529101FB5CC9400FB912B /* UnlockerViewController.swift in Sources */,
 				2EB529141FBA9F1000FB912B /* Helper+String.swift in Sources */,
 				2EB528D01FB30ECD00FB912B /* AppDelegate.swift in Sources */,
@@ -734,6 +740,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NZF49C8V6H;
+				HEADER_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/FMDB/src/fmdb\"\n\"${PODS_ROOT}/FMDB/src/fmdb\"\n${PODS_ROOT}/FMDB/src/fmdb",
+				);
 				INFOPLIST_FILE = FreeOfo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -752,6 +761,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NZF49C8V6H;
+				HEADER_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/FMDB/src/fmdb\"\n\"${PODS_ROOT}/FMDB/src/fmdb\"\n${PODS_ROOT}/FMDB/src/fmdb",
+				);
 				INFOPLIST_FILE = FreeOfo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

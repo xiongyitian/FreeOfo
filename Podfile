@@ -12,6 +12,7 @@ target 'FreeOfo' do
   pod 'RxBluetoothKit'
   pod 'SwiftyJSON'
   pod 'Toast-Swift', '~> 2.0.0'
+  pod 'FMDB'
 
   target 'FreeOfoTests' do
     inherit! :search_paths

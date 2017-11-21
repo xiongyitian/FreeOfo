@@ -10,5 +10,5 @@
 #define BridgeHeader_h
 
 #import <CommonCrypto/CommonCrypto.h>
-
+#import "FMDB.h"
 #endif /* BridgeHeader_h */
